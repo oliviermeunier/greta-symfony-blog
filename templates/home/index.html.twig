@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{# Block title : balise <title> dans le <head> #}
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+
+{# Titre de la page (balise <h1> #}
+{% block main_page_title %}Bienvenue sur My Blog !{% endblock %}
+
+
+{# Block stylesheets : feuilles de styles spécifiques à la page d'accueil #}
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <!-- CSS personnelles spécifiques à la page d'accueil -->
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+
+{# Block body : contenu de la partie principale de la page d'accueil #}
+{% block body %}
+
+    {% for post in posts %}
+        <div class="card mb-4">
+            <img class="card-img-top" src="{{ post.image }}" alt="{{ post.title }}">
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-text">{{ post.content|slice(0,150) }}...</p>
+                <a href="#" class="btn btn-primary">Lire la suite</a>
+            </div>
+            <div class="card-footer text-muted">
+                Créé par <span class="post-author">{{ post.author }}</span> le {{ post.createdAt|date('d/m/Y') }}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
