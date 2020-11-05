@@ -6,6 +6,9 @@
 
 {% block body %}
 
+    <!-- Category -->
+    <span class="badge badge-secondary">{{ post.category.name }}</span>
+
     <!-- Author and date -->
     <p class="lead">Créé par {{ post.author }} le {{ post.createdAt|date('d/m/Y') }}</p>
 
