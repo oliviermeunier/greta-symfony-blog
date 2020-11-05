@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ post.title }}{% endblock %}
+
+{% block main_page_title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+
+    <!-- Author and date -->
+    <p class="lead">Créé par {{ post.author }} le {{ post.createdAt|date('d/m/Y') }}</p>
+
+    <!-- Preview Image -->
+    <img class="img-fluid rounded" src="{{ post.image }}" alt="">
+
+    <!-- Post Content -->
+    <p class="lead">{{ post.content }}</p>
+
+{% endblock %}

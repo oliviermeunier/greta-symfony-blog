@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Post;
 use App\Repository\PostRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -19,11 +20,16 @@ use Zenstruck\Foundry\Proxy;
  */
 final class PostFactory extends ModelFactory
 {
-    public function __construct()
+    /**
+     * @var SluggerInterface
+     */
+    private $slugger;
+
+    public function __construct(SluggerInterface $slugger)
     {
         parent::__construct();
 
-        // TODO inject services if required (https://github.com/zenstruck/foundry#factories-as-services)
+        $this->slugger = $slugger;
     }
 
     protected function getDefaults(): array
@@ -33,7 +39,8 @@ final class PostFactory extends ModelFactory
             'content' => self::faker()->text(2500),
             'image' => "https://picsum.photos/seed/post-" . rand(0,500) . "/750/300",
             'author' => self::faker()->name(),
-            'createdAt' => self::faker()->dateTimeBetween('-3 years', 'now', 'Europe/Paris')
+            'createdAt' => self::faker()->dateTimeBetween('-3 years', 'now', 'Europe/Paris'),
+            'category' => CategoryFactory::random()
         ];
     }
 
@@ -41,7 +48,10 @@ final class PostFactory extends ModelFactory
     {
         // see https://github.com/zenstruck/foundry#initialization
         return $this
-            // ->afterInstantiate(function(Post $post) {})
+             ->afterInstantiate(function(Post $post) {
+                    $slug = $this->slugger->slug($post->getTitle());
+                    $post->setSlug($slug);
+             })
         ;
     }
 
