@@ -1,0 +1,6 @@
+<div class="media mb-4">
+    <div class="media-body">
+        <h5 class="mt-0">Posté par {{ comment.user }} le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:i', 'Europe/Paris') }}</h5>
+        {{ comment.content }}
+    </div>
+</div>

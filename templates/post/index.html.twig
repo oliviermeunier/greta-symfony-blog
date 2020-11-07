@@ -6,6 +6,9 @@
 
 {% block body %}
 
+    <!-- Inclusion du template de la modal de confirmation d'ajout de commentaire -->
+    {% include 'modals/_success.html.twig' with {'message':'Commentaire envoyé avec succès', 'id':'add-comment-success-modal'} %}
+
     <!-- Category -->
     <span class="badge badge-secondary">{{ post.category.name }}</span>
 
@@ -17,5 +20,44 @@
 
     <!-- Post Content -->
     <p class="lead">{{ post.content }}</p>
+
+    <h4>Commentaires</h4>
+
+    <!-- Formulaire d'ajout de commentaire -->
+    <div class="card my-4">
+        <h5 class="card-header">Laissez un commentaire:</h5>
+        <div class="card-body">
+            {{ form_start(form, {'attr':{'id':'comment-form'}}) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Envoyer mon commentaire">
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <!-- List of comments -->
+    {% if post.comments|length == 0 %}
+        <p>Soyez le premier à commenter cet article !</p>
+    {% else %}
+        <ul class="comments-list">
+            {% for comment in post.comments %}
+                <li class="media mb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0">Posté par {{ comment.user }} le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:i', 'Europe/Paris') }}</h5>
+                        {{ comment.content }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {%  endif %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <!-- Script personnel pour la parge Article -->
+    <script src="{{ asset('js/post.js') }}"></script>
 
 {% endblock %}
