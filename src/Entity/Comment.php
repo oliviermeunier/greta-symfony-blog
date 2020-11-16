@@ -19,11 +19,6 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $content;
@@ -40,23 +35,17 @@ class Comment
      */
     private $post;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getUser(): ?string
-    {
-        return $this->user;
-    }
-
-    public function setUser(string $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
+    
     public function getContent(): ?string
     {
         return $this->content;
@@ -89,6 +78,18 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

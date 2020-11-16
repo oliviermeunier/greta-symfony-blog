@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Créer un compte{% endblock %}
+
+{% block main_page_title %}Créer un compte{% endblock %}
+
+{% block body %}
+
+    {# Formulaire de création de compte #}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Valider" class="btn btn-primary">
+    {{ form_end(form) }}
+
+{% endblock %}

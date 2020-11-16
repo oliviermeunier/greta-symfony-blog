@@ -1,0 +1,19 @@
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> {{ app.user.firstname }} {{ app.user.lastname }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Mon compte</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ path('security.logout') }}">Déconnexion</a>
+        </div>
+    </li>
+{% else %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('security.login') }}">Connexion</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('user.new') }}">Créer un compte</a>
+    </li>
+{% endif %}

@@ -29,7 +29,7 @@ final class CommentFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'user' => self::faker()->name(),
+            'user' => UserFactory::random(),
             'content' => self::faker()->text(250),
             'createdAt' => self::faker()->dateTimeBetween('-3 years', 'now', 'Europe/Paris'),
             'post' => PostFactory::random()

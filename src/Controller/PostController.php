@@ -34,6 +34,8 @@ class PostController extends AbstractController
             // On attribut au champ post l'article sur lequel on se trouve
             $comment->setPost($post);
 
+            $comment->setUser($this->getUser());
+
             // Persistence des données
             $manager->persist($comment);
             $manager->flush();
@@ -63,6 +65,8 @@ class PostController extends AbstractController
 
             $comment = $form->getData();
             $comment->setPost($post);
+
+            $comment->setUser($this->getUser());
 
             $manager->persist($comment);
             $manager->flush();
