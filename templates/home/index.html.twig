@@ -32,7 +32,7 @@
                 <a href="{{ path('post.index', {'slug':post.slug}) }}" class="btn btn-primary">Lire la suite</a>
             </div>
             <div class="card-footer text-muted">
-                Créé par <span class="post-author">{{ post.author }}</span> le {{ post.createdAt|date('d/m/Y') }}
+                Créé par <span class="post-author">{{ post.user.fullname }}</span> le {{ post.createdAt|date('d/m/Y') }}
             </div>
         </div>
     {% endfor %}

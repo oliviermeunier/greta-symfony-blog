@@ -31,9 +31,8 @@ class PostController extends AbstractController
             // On réucpère les données du formulaire
             $comment = $form->getData();
 
-            // On attribut au champ post l'article sur lequel on se trouve
+            // On attribut au champ post l'article sur lequel on se trouve et l'utilisateur connecté
             $comment->setPost($post);
-
             $comment->setUser($this->getUser());
 
             // Persistence des données

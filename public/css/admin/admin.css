@@ -2,3 +2,12 @@ body {
     padding-top:56px;
     background-color: #5eb5e0;
 }
+
+/*** DASHBOARD ***/
+table.posts-list figure {
+    width: 150px;
+}
+
+table.posts-list img {
+    width: 100%;
+}
