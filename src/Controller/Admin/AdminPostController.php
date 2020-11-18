@@ -34,7 +34,7 @@ class AdminPostController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$imageUploadFile->guessExtension();
 
                 $imageUploadFile->move(
-                    'uploads/post/image',
+                    $this->getParameter('post_image_directory'),
                     $newFilename
                 );
 

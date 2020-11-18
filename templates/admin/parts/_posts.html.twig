@@ -21,7 +21,7 @@
             <td>{{ post.title|slice(0,160) }}</td>
             <td>
                 <figure>
-                    <img src="{{ asset('uploads/post/image/' ~ post.image) }}" alt="">
+                    <img src="{{ asset(post_image_dir ~ '/' ~ post.image) }}" alt="">
                 </figure></td>
             <td>{{ post.user.fullname }}</td>
             <td>

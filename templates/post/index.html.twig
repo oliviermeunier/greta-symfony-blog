@@ -16,7 +16,7 @@
     <p class="lead">Créé par {{ post.user.fullname }} le {{ post.createdAt|date('d/m/Y') }}</p>
 
     <!-- Preview Image -->
-    <img class="img-fluid rounded" src="{{ post.image }}" alt="">
+    <img class="img-fluid rounded" src="{{ asset(post_image_dir ~ '/' ~ post.image) }}" alt="">
 
     <!-- Post Content -->
     <p class="lead">{{ post.content }}</p>
