@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
+use Gedmo\Sluggable\Util\Urlizer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,20 @@ class AdminPostController extends AbstractController
 
             $post = $form->getData();
             $post->setUser($this->getUser());
+
+            if ($imageUploadFile = $form->get('imageFile')->getData()) {
+
+                $originalFilename = pathinfo($imageUploadFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = Urlizer::urlize($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageUploadFile->guessExtension();
+
+                $imageUploadFile->move(
+                    'uploads/post/image',
+                    $newFilename
+                );
+
+                $post->setImage($newFilename);
+            }
 
             $manager->persist($post);
             $manager->flush();
