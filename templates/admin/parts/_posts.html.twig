@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     {% for post in posts %}
-        <tr>
+        <tr id="post-{{ post.id }}">
             <td>{{ post.id }}</td>
             <td>{{ post.createdAt|date('d/m/Y H:i', 'Europe/Paris') }}</td>
             <td>{{ post.title|slice(0,160) }}</td>
@@ -27,7 +27,7 @@
             <td>{{ post.user.fullname }}</td>
             <td>
                 <a href="{{ path('admin.post.edit', {'id':post.id}) }}" class="post-edit mr-3"><i class="fas fa-edit"></i></a>
-                <a href="#" class="post-remove"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{ path('admin.post.remove', {'id':post.id}) }}" class="post-remove" data-id="{{ post.id }}"><i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>
     {% endfor %}

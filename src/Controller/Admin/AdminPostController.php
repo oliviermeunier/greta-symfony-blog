@@ -104,4 +104,32 @@ class AdminPostController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/post/remove/{id}", name="admin.post.remove")
+     */
+    public function remove(EntityManagerInterface $manager, Post $post, Filesystem $filesystem, Request $request)
+    {
+        $id = $post->getId();
+
+        // Suppression du fichier image
+        if ($currentFilename = $post->getImage()) {
+            $currentPath = $this->getParameter('post_image_directory') . '/' . $currentFilename;
+            if ($filesystem->exists($currentPath)) {
+                $filesystem->remove($currentPath);
+            }
+        }
+
+        // Suppression de l'entité
+        $manager->remove($post);
+        $manager->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->json($id);
+        }
+
+        $this->addFlash('success', 'Article supprimé avec succès.');
+
+        return $this->redirectToRoute('admin.index');
+    }
 }

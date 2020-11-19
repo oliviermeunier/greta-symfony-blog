@@ -4,6 +4,9 @@
 
 {% block body %}
 
+    {% include 'modals/_success.html.twig' with {'message':'Article supprimé.', 'id':'remove-post-success-modal'} %}
+    {% include 'modals/_confirm.html.twig' with {'message':'Êtes-vous sûr de vouloir supprimer cet article ?', 'id':'remove-post-confirm-modal'} %}
+
     <ul class="nav nav-tabs" id="dashboard-tabs" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Articles</a>
@@ -14,5 +17,15 @@
             {% include 'admin/parts/_posts.html.twig' %}
         </div>
     </div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+    {{  parent() }}
+
+    <script src="{{ asset('js/admin/admin.js') }}"></script>
 
 {% endblock %}
