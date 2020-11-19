@@ -11,3 +11,8 @@ table.posts-list figure {
 table.posts-list img {
     width: 100%;
 }
+
+#post-image-preview {
+    margin-top: -1.5rem;
+    width: 150px;
+}

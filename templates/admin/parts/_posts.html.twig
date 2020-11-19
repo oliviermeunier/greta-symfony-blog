@@ -21,11 +21,12 @@
             <td>{{ post.title|slice(0,160) }}</td>
             <td>
                 <figure>
-                    <img src="{{ asset(post_image_dir ~ '/' ~ post.image) }}" alt="">
-                </figure></td>
+                    <img src="{{ asset_post_image(post.image) }}" alt="">
+                </figure>
+            </td>
             <td>{{ post.user.fullname }}</td>
             <td>
-                <a href="#" class="post-edit mr-3"><i class="fas fa-edit"></i></a>
+                <a href="{{ path('admin.post.edit', {'id':post.id}) }}" class="post-edit mr-3"><i class="fas fa-edit"></i></a>
                 <a href="#" class="post-remove"><i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>

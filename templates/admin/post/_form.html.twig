@@ -1,0 +1,12 @@
+{# Formulaire de création d'article #}
+{{ form_start(form) }}
+{{ form_widget(form) }}
+
+{% if form.vars.data.image is defined %}
+    <figure>
+        <img id="post-image-preview" src="{{ asset_post_image(form.vars.data.image) }}" alt="">
+    </figure>
+{% endif %}
+
+<input type="submit" value="Enregistrer" class="btn btn-primary mb-3">
+{{ form_end(form) }}
